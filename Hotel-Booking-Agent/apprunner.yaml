@@ -1,0 +1,18 @@
+version: 1.0
+runtime: docker
+build:
+  commands:
+    build:
+      - echo "Building the Docker image"
+run:
+  runtime-version: latest
+  command: streamlit run app_openai.py --server.port=8501 --server.address=0.0.0.0
+  network:
+    port: 8501
+    env:
+      PORT: 8501
+  env:
+    - name: STREAMLIT_SERVER_HEADLESS
+      value: "true"
+    - name: STREAMLIT_BROWSER_GATHER_USAGE_STATS
+      value: "false"
