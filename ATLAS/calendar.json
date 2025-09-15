@@ -1,0 +1,44 @@
+{
+  "events": [
+    {
+      "title": "Computer Science Lecture",
+      "date": "2024-09-16",
+      "time": "09:00-10:30",
+      "type": "class",
+      "location": "Room 101"
+    },
+    {
+      "title": "Mathematics Assignment Due",
+      "date": "2024-09-18",
+      "time": "23:59",
+      "type": "deadline",
+      "priority": "high"
+    },
+    {
+      "title": "Study Group - Physics",
+      "date": "2024-09-17",
+      "time": "14:00-16:00",
+      "type": "study",
+      "location": "Library"
+    },
+    {
+      "title": "Programming Project Presentation",
+      "date": "2024-09-20",
+      "time": "11:00-12:00",
+      "type": "presentation",
+      "priority": "high"
+    }
+  ],
+  "recurring": [
+    {
+      "title": "CS Lecture",
+      "days": ["Monday", "Wednesday", "Friday"],
+      "time": "09:00-10:30"
+    },
+    {
+      "title": "Math Tutorial",
+      "days": ["Tuesday", "Thursday"],
+      "time": "15:00-16:00"
+    }
+  ]
+}

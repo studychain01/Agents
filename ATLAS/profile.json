@@ -1,0 +1,22 @@
+{
+  "profiles": [
+    {
+      "id": "student_123",
+      "name": "Student User",
+      "email": "student@example.com",
+      "major": "Computer Science",
+      "year": "Junior",
+      "preferences": {
+        "study_style": "visual",
+        "preferred_study_times": ["morning", "evening"],
+        "break_intervals": 25,
+        "subjects": ["Programming", "Mathematics", "Physics"]
+      },
+      "goals": {
+        "semester": "Maintain 3.5+ GPA",
+        "weekly": "Complete all assignments on time",
+        "daily": "Study 4-6 hours per day"
+      }
+    }
+  ]
+}

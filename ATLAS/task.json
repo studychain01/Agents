@@ -1,0 +1,80 @@
+{
+  "assignments": [
+    {
+      "id": "math_hw_001",
+      "title": "Calculus Problem Set 5",
+      "subject": "Mathematics",
+      "due_date": "2024-09-18",
+      "due_time": "23:59",
+      "status": "in_progress",
+      "priority": "high",
+      "estimated_hours": 3,
+      "completed_hours": 1,
+      "description": "Complete problems 1-20 from Chapter 8"
+    },
+    {
+      "id": "cs_proj_001",
+      "title": "Web Application Development",
+      "subject": "Computer Science",
+      "due_date": "2024-09-25",
+      "due_time": "17:00",
+      "status": "not_started",
+      "priority": "medium",
+      "estimated_hours": 15,
+      "completed_hours": 0,
+      "description": "Build a full-stack web application using React and Node.js"
+    },
+    {
+      "id": "phys_lab_001",
+      "title": "Physics Lab Report - Pendulum Experiment",
+      "subject": "Physics",
+      "due_date": "2024-09-20",
+      "due_time": "14:00",
+      "status": "completed",
+      "priority": "medium",
+      "estimated_hours": 4,
+      "completed_hours": 4,
+      "description": "Analyze pendulum motion data and write comprehensive lab report"
+    }
+  ],
+  "study_sessions": [
+    {
+      "id": "study_001",
+      "title": "Review for Midterm Exam",
+      "subject": "Mathematics",
+      "scheduled_date": "2024-09-19",
+      "scheduled_time": "15:00-17:00",
+      "status": "planned",
+      "topics": ["Derivatives", "Integrals", "Applications"],
+      "estimated_hours": 2
+    },
+    {
+      "id": "study_002",
+      "title": "Programming Practice",
+      "subject": "Computer Science",
+      "scheduled_date": "2024-09-17",
+      "scheduled_time": "19:00-21:00",
+      "status": "planned",
+      "topics": ["Data Structures", "Algorithms", "Problem Solving"],
+      "estimated_hours": 2
+    }
+  ],
+  "goals": [
+    {
+      "id": "goal_001",
+      "title": "Complete all assignments this week",
+      "type": "weekly",
+      "deadline": "2024-09-22",
+      "progress": 60,
+      "status": "in_progress"
+    },
+    {
+      "id": "goal_002",
+      "title": "Study 25 hours this week",
+      "type": "weekly",
+      "deadline": "2024-09-22",
+      "progress": 45,
+      "status": "in_progress"
+    }
+  ]
+}
