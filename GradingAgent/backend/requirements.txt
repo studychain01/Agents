@@ -1,10 +1,10 @@
-fastapi>=0.104.1
-uvicorn[standard]>=0.24.0
-pydantic>=2.5.0
-langgraph
-langchain-openai>=0.1.7
-langchain-core
-langgraph>=0.2.26
-python-dotenv
-fastapi>=0.111.0
-python-dotenv>=1.0.1
+fastapi==0.111.0
+uvicorn[standard]==0.30.0
+pydantic==2.7.1
+python-dotenv==1.0.1
+
+# LangChain stack
+langchain==0.2.14
+langchain-openai==0.1.7
+langgraph==0.2.26
+openai==1.40.0
