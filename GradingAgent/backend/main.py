@@ -17,7 +17,8 @@ def get_llm() -> ChatOpenAI:
     api_key = os.getenv("OPENAI_API_KEY")
     if not api_key:
         raise RuntimeError("OPENAI_API_KEY is not set")
-    return ChatOpenAI(model="gpt-4", api_key=api_key)
+    # Rely on env var; recent langchain-openai expects it via environment
+    return ChatOpenAI(model="gpt-4")
 
 class State(TypedDict):
     """Represents the state of the essay graind process."""
