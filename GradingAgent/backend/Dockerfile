@@ -3,15 +3,18 @@ FROM python:3.11-slim
 
 # System/runtime hygiene
 ENV PYTHONDONTWRITEBYTECODE=1 \
-    PYTHONUNBUFFERED=1 \
-    PIP_NO_CACHE_DIR=1 \
-    PATH="/root/.local/bin:$PATH"
+    PYTHONUNBUFFERED=1
 
 WORKDIR /app
 
-# Install build dependencies and Python packages
+# Install system dependencies and Python packages
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends gcc python3-dev && \
+    rm -rf /var/lib/apt/lists/*
+
+# Install Python packages
 COPY requirements.txt .
-RUN pip install --user --no-cache-dir -r requirements.txt
+RUN pip3 install --no-cache-dir -r requirements.txt
 
 # Copy application code
 COPY . .
@@ -20,4 +23,4 @@ COPY . .
 EXPOSE 8000
 
 # Start the FastAPI application
-CMD ["/root/.local/bin/uvicorn", "main:fastapi_app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["/usr/local/bin/uvicorn", "main:fastapi_app", "--host", "0.0.0.0", "--port", "8000"]
