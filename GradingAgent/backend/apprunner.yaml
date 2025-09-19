@@ -13,5 +13,3 @@ run:
   env:
     - name: PYTHONUNBUFFERED
       value: "1"
-    - name: OPENAI_API_KEY
-      value: "your-api-key-here"
