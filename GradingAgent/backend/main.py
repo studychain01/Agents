@@ -13,6 +13,12 @@ import uvicorn
 load_dotenv()
 os.environ["OPENAI_API_KEY"] = os.getenv("OPENAI_API_KEY")
 
+def get_llm() -> ChatOpenAI:
+    api_key = os.getenv("OPENAI_API_KEY")
+    if not api_key:
+        raise RuntimeError("OPENAI_API_KEY is not set")
+    return ChatOpenAI(model="gpt-4", api_key=api_key)
+
 class State(TypedDict):
     """Represents the state of the essay graind process."""
     essay: str
@@ -22,7 +28,6 @@ class State(TypedDict):
     depth_score: float 
     final_score: float 
 
-llm = ChatOpenAI(model="gpt-4")
 
 def extract_score(content: str) -> float:
     """Extract the numeric score from the LLM's response."""
@@ -30,6 +35,7 @@ def extract_score(content: str) -> float:
     if match: 
         return float(match.group(1))
     raise ValueError(f"Could not extract score from: {content}")
+
 
 def check_relevance(state: State) -> State:
     """Check the relevance of the essay."""
@@ -41,7 +47,7 @@ def check_relevance(state: State) -> State:
         "then provide your explanation.\n\nEssay: {essay}"
     )
 
-    result = llm.invoke(prompt.format(essay=state["essay"]))
+    result = get_llm().invoke(prompt.format(essay=state["essay"]))
     try: 
         state["relevance_score"] = extract_score(result.content)
 
@@ -49,6 +55,7 @@ def check_relevance(state: State) -> State:
         print(f"Error in check_relevance: {e}")
         state["relevance_score"] = 0.0
     return state 
+
 
 def check_grammar(state: State) -> State:
     """Check the grammar of the essay."""
@@ -59,7 +66,7 @@ def check_grammar(state: State) -> State:
         "then provide your explanation. \n\nEssay: {essay}"
     )
 
-    result = llm.invoke(prompt.format(essay=state["essay"]))
+    result = get_llm().invoke(prompt.format(essay=state["essay"]))
 
     try: 
         state["grammar_score"] = extract_score(result.content)
@@ -67,6 +74,7 @@ def check_grammar(state: State) -> State:
         print(f"Error in check_grammar: {e}")
         state["grammar_score"] = 0.0
     return state 
+
 
 
 def analyze_structure(state: State) -> State:
@@ -77,7 +85,7 @@ def analyze_structure(state: State) -> State:
         "Your response should start with 'Score: ' followed by the numeric score"
         "then provide your explanation. \n\nEssay: {essay}"
     )
-    result = llm.invoke(prompt.format(essay=state["essay"]))
+    result = get_llm().invoke(prompt.format(essay=state["essay"]))
 
     try: 
         state["structure_score"]  = extract_score(result.content)
@@ -85,6 +93,7 @@ def analyze_structure(state: State) -> State:
         print(f"Error in analyze_structure: {e}")
         state["structure_score"] = 0.0
     return state 
+
 
 def evaluate_depth(state: State) -> State:
     """Evaluate the depth of the essay."""
@@ -95,7 +104,7 @@ def evaluate_depth(state: State) -> State:
         "then provide your explanation. \n\nEssay: {essay}"
     )
 
-    result = llm.invoke(prompt.format(essay=state["essay"]))
+    result = get_llm().invoke(prompt.format(essay=state["essay"]))
     try: 
         state["depth_score"] = extract_score(result.content)
 
@@ -103,6 +112,7 @@ def evaluate_depth(state: State) -> State:
         print(f"Error in evaluate_depth: {e}")
         state["depth_score"] = 0.0
     return state 
+
 
 def calculate_final_score(state: State) -> State:
     """Calculate the final score based on individual component scores."""
