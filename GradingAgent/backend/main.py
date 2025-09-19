@@ -22,7 +22,7 @@ class State(TypedDict):
     depth_score: float 
     final_score: float 
 
-llm = ChatOpenAI(model="gpt-4o-mini")
+llm = ChatOpenAI(model="gpt-4")
 
 def extract_score(content: str) -> float:
     """Extract the numeric score from the LLM's response."""
