@@ -13,6 +13,5 @@ run:
   env:
     - name: PYTHONUNBUFFERED
       value: "1"
-    # Add your OpenAI API key in App Runner environment variables, not here
-    # - name: OPENAI_API_KEY
-    #   value: "your-key-here"
+    - name: OPENAI_API_KEY
+      value: "your-api-key-here"
