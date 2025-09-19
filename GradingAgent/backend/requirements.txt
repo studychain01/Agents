@@ -7,7 +7,7 @@ python-dotenv==1.0.1
 pydantic==2.7.1
 
 # LangChain stack
-langchain==0.2.14
-langchain-openai==0.1.13
+langchain==0.2.20
+langchain-openai==0.2.6
 langgraph==0.2.26
 openai==1.40.0
