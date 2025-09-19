@@ -1,0 +1,18 @@
+version: 1.0
+runtime: python3
+build:
+  commands:
+    build:
+      - python -m pip install --upgrade pip
+      - python -m pip install -r requirements.txt
+run:
+  runtime-version: 3.11
+  command: uvicorn main:fastapi_app --host 0.0.0.0 --port 8000
+  network:
+    port: 8000
+  env:
+    - name: PYTHONUNBUFFERED
+      value: "1"
+    # Add your OpenAI API key in App Runner environment variables, not here
+    # - name: OPENAI_API_KEY
+    #   value: "your-key-here"
