@@ -1,3 +1,5 @@
+# Cache bust - force rebuild
+ARG CACHE_BUST=1
 FROM python:3.12-slim
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
