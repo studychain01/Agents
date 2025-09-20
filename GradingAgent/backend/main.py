@@ -7,6 +7,7 @@ from dotenv import load_dotenv
 import re
 
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import uvicorn 
 
@@ -186,6 +187,15 @@ class EssayResponse(BaseModel):
 
 # FastAPI app
 fastapi_app = FastAPI(title="Essay Grading API", description="AI-powered essay grading system")
+
+# Add CORS middleware to allow frontend requests
+fastapi_app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # In production, specify your frontend domain
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @fastapi_app.post("/grade-essay", response_model=EssayResponse)
 async def grade_essay_endpoint(request: EssayRequest):
