@@ -1,14 +1,15 @@
-# Cache bust - force rebuild - v2
-ARG CACHE_BUST=2
-ARG BUILD_DATE=2025-01-20
-FROM python:3.12-slim
+# Cache bust - force rebuild - v4 - COMPLETE REBUILD
+ARG CACHE_BUST=4
+ARG BUILD_DATE=2025-01-20-2
+ARG FORCE_REBUILD=true
+FROM python:3.12-slim-bullseye
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
     PIP_NO_CACHE_DIR=1
 
-# Force cache invalidation
-RUN echo "Build date: $BUILD_DATE" && echo "Cache bust: $CACHE_BUST"
+# Force cache invalidation - COMPLETE REBUILD
+RUN echo "Build date: $BUILD_DATE" && echo "Cache bust: $CACHE_BUST" && echo "Force rebuild: $FORCE_REBUILD" && echo "Complete cache invalidation at $(date)"
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
