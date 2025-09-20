@@ -1,4 +1,6 @@
-const BASE_URL = import.meta.env.VITE_API_URL?.replace(/\/$/, '');
+// Backend API URL
+const BACKEND_URL = 'https://ukp7a2u6pw.us-east-1.awsapprunner.com';
+const BASE_URL = import.meta.env.VITE_API_URL?.replace(/\/$/, '') ?? BACKEND_URL;
 
 async function json<T>(res: Response): Promise<T> {
   if (!res.ok) {
