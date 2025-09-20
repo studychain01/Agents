@@ -5,6 +5,11 @@ export default defineConfig({
   preview: {
     host: "0.0.0.0",
     port: 4173,
-    allowedHosts: "all"
+    allowedHosts: ["5pbxzfbk9p.us-east-1.awsapprunner.com", "all"]
+  },
+  server: {
+    host: "0.0.0.0",
+    port: 4173,
+    allowedHosts: ["5pbxzfbk9p.us-east-1.awsapprunner.com", "all"]
   }
 });
