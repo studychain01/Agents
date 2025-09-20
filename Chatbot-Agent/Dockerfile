@@ -1,14 +1,11 @@
-# Cache bust - force rebuild - v3
-ARG CACHE_BUST=3
-ARG BUILD_DATE=2025-01-20
+# NEW DOCKERFILE - FORCE REBUILD
 FROM python:3.12-slim
 
+# Environment variables
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
-    PIP_NO_CACHE_DIR=1
-
-# Force cache invalidation
-RUN echo "Build date: $BUILD_DATE" && echo "Cache bust: $CACHE_BUST"
+    PIP_NO_CACHE_DIR=1 \
+    PORT=8080
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -18,30 +15,29 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # Create non-root user
 RUN useradd -m -u 10001 appuser
 
+# Set working directory
 WORKDIR /app
 
-# Copy requirements first for better caching
+# Copy requirements and install dependencies
 COPY Chatbot-Agent/backend/requirements.txt .
-
-# Install Python dependencies
 RUN pip install --upgrade pip && \
     pip install -r requirements.txt
 
 # Copy application code
-COPY Chatbot-Agent/backend/ /app
+COPY Chatbot-Agent/backend/ .
 
-# Change ownership to appuser
+# Change ownership
 RUN chown -R appuser:appuser /app
 
-# Expose port (use 8080 for AWS App Runner)
+# Expose port
 EXPOSE 8080
 
 # Health check
 HEALTHCHECK --interval=30s --timeout=3s --start-period=10s --retries=3 \
-    CMD curl -fsS http://127.0.0.1:8080/docs || exit 1
+    CMD curl -fsS http://127.0.0.1:8080/health || exit 1
 
 # Switch to non-root user
 USER appuser
 
-# Start the application
+# Start application
 CMD ["uvicorn", "app:fastapi_app", "--host", "0.0.0.0", "--port", "8080"]
