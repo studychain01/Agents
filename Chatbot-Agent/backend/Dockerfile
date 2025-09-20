@@ -19,12 +19,12 @@ RUN useradd -m -u 10001 appuser
 WORKDIR /app
 
 # Copy requirements and install dependencies
-COPY Chatbot-Agent/backend/requirements.txt .
+COPY requirements.txt .
 RUN pip install --upgrade pip && \
     pip install -r requirements.txt
 
 # Copy application code
-COPY Chatbot-Agent/backend/ .
+COPY . .
 
 # Change ownership
 RUN chown -R appuser:appuser /app
