@@ -1,5 +1,5 @@
-# Cache bust - force rebuild - v2
-ARG CACHE_BUST=2
+# Cache bust - force rebuild - v3
+ARG CACHE_BUST=3
 ARG BUILD_DATE=2025-01-20
 FROM python:3.12-slim
 
@@ -21,14 +21,14 @@ RUN useradd -m -u 10001 appuser
 WORKDIR /app
 
 # Copy requirements first for better caching
-COPY requirements.txt .
+COPY Chatbot-Agent/backend/requirements.txt .
 
 # Install Python dependencies
 RUN pip install --upgrade pip && \
     pip install -r requirements.txt
 
 # Copy application code
-COPY . /app
+COPY Chatbot-Agent/backend/ /app
 
 # Change ownership to appuser
 RUN chown -R appuser:appuser /app
@@ -45,4 +45,3 @@ USER appuser
 
 # Start the application
 CMD ["uvicorn", "app:fastapi_app", "--host", "0.0.0.0", "--port", "8080"]
-    
