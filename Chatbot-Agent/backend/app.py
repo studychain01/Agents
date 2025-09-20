@@ -8,8 +8,14 @@ from pydantic import BaseModel
 import os 
 from dotenv import load_dotenv 
 
+# Load environment variables (for local development)
 load_dotenv()
-os.environ["OPENAI_API_KEY"] = os.getenv("OPENAI_API_KEY")
+
+# Set OpenAI API key from environment variable
+openai_api_key = os.getenv("OPENAI_API_KEY")
+if not openai_api_key:
+    raise ValueError("OPENAI_API_KEY environment variable is required")
+os.environ["OPENAI_API_KEY"] = openai_api_key
 
 llm = ChatOpenAI(model="gpt-4o-mini", max_tokens=1000, temperature=0)
 
@@ -49,6 +55,10 @@ fastapi_app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"]
 )
+
+@fastapi_app.get("/health")
+async def health_check():
+    return {"status": "healthy", "message": "Chatbot API is running"}
 
 @fastapi_app.post("/chat")
 async def chatbot(request: ChatRequest):
