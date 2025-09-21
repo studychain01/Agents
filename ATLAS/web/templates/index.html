@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ATLAS - Academic Task Learning Agent System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-graduation-cap"></i>
+                    <h1>ATLAS</h1>
+                    <span class="subtitle">Academic Task Learning Agent System</span>
+                </div>
+                <div class="status-indicator">
+                    <div id="status-dot" class="status-dot loading"></div>
+                    <span id="status-text">Initializing...</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Agent Selection -->
+            <div class="agent-selector">
+                <h3>Choose Your Assistant</h3>
+                <div class="agent-buttons">
+                    <button class="agent-btn active" data-agent="planner">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Study Planner</span>
+                        <small>Plan your study schedule and manage tasks</small>
+                    </button>
+                    <button class="agent-btn" data-agent="notewriter">
+                        <i class="fas fa-edit"></i>
+                        <span>Note Writer</span>
+                        <small>Generate personalized study materials</small>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Chat Interface -->
+            <div class="chat-container">
+                <div class="chat-messages" id="chat-messages">
+                    <div class="message assistant-message">
+                        <div class="message-avatar">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <div class="message-content">
+                            <p>👋 Hi there! I'm ATLAS, your AI academic assistant. I can help you with:</p>
+                            <ul>
+                                <li>📅 Creating study schedules and plans</li>
+                                <li>📝 Managing assignments and deadlines</li>
+                                <li>🎯 Prioritizing tasks based on your goals</li>
+                                <li>📚 Generating personalized study materials</li>
+                            </ul>
+                            <p><strong>Try asking me:</strong></p>
+                            <div class="suggestion-pills">
+                                <span class="pill" onclick="sendSuggestion('What assignments are due this week?')">What assignments are due this week?</span>
+                                <span class="pill" onclick="sendSuggestion('Help me create a study plan for calculus')">Help me create a study plan for calculus</span>
+                                <span class="pill" onclick="sendSuggestion('I need to prepare for my physics exam')">I need to prepare for my physics exam</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Input Area -->
+                <div class="chat-input-container">
+                    <div class="chat-input-wrapper">
+                        <textarea 
+                            id="chat-input" 
+                            placeholder="Ask me about your studies, assignments, or academic goals..."
+                            rows="1"
+                        ></textarea>
+                        <button id="send-btn" class="send-btn" disabled>
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                    <div class="input-footer">
+                        <small>💡 Tip: Be specific about your academic needs for better assistance</small>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="loading-overlay hidden">
+        <div class="loading-spinner">
+            <div class="spinner"></div>
+            <p>Thinking...</p>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
