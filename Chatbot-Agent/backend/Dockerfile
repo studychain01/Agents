@@ -21,7 +21,8 @@ WORKDIR /app
 # Copy requirements and install dependencies
 COPY requirements.txt .
 RUN pip install --upgrade pip && \
-    pip install -r requirements.txt
+    pip install -r requirements.txt && \
+    pip list | grep uvicorn
 
 # Copy application code
 COPY . .
@@ -38,6 +39,9 @@ HEALTHCHECK --interval=30s --timeout=3s --start-period=10s --retries=3 \
 
 # Switch to non-root user
 USER appuser
+
+# Verify uvicorn is available
+RUN which uvicorn && uvicorn --version
 
 # Start application
 CMD ["uvicorn", "app:fastapi_app", "--host", "0.0.0.0", "--port", "8080"]
