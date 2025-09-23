@@ -1,0 +1,24 @@
+version: 1.0
+runtime: nodejs18
+build:
+  commands:
+    build:
+      - echo "Installing dependencies..."
+      - npm ci
+      - echo "Building application..."
+      - npm run build
+      - echo "Build completed"
+run:
+  runtime-version: 18
+  command: npm run preview
+  network:
+    port: 4173
+    env: PORT
+  env:
+    - name: PORT
+      value: "4173"
+    - name: VITE_API_URL
+      value: "https://your-backend-url.awsapprunner.com"
+    - name: VITE_API_BASE
+      value: "https://your-backend-url.awsapprunner.com"
+

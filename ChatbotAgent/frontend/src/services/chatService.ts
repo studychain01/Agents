@@ -1,5 +1,6 @@
 export async function sendChatMessage(text: string) {
-    const res = await fetch(`${import.meta.env.VITE_API_BASE}/chat`, {
+    const apiBase = import.meta.env.VITE_API_BASE || import.meta.env.VITE_API_URL || 'http://localhost:8000';
+    const res = await fetch(`${apiBase}/chat`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json'},
         body: JSON.stringify({message: text}),
