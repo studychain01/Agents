@@ -21,14 +21,16 @@ function MessageBubble({ message }: MessageBubbleProps) {
                   : 'bg-gray-200 text-gray-900 rounded-bl-md'
               }`}
               style={{
-                backgroundColor: isUser ? '#3b82f6' : '#e5e7eb',
+                backgroundColor: isUser ? '#3b82f6' : '#f8f9fa',
                 color: isUser ? 'white' : '#111827',
                 padding: '8px 12px',
                 borderRadius: '16px',
                 marginLeft: isUser ? '48px' : '0px',
                 marginRight: isUser ? '0px' : '48px',
                 maxWidth: '280px',
-                wordWrap: 'break-word'
+                wordWrap: 'break-word',
+                border: isUser ? 'none' : '1px solid #e1e5e9',
+                boxShadow: isUser ? '0 1px 2px rgba(0,0,0,0.1)' : 'none'
               }}
             >
               <div className="text-sm leading-relaxed break-words overflow-wrap-anywhere">

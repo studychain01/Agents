@@ -70,8 +70,8 @@ export function ChatComposer() {
 
   return (
     <div className="border-t border-gray-200 bg-white">
-      <div className="max-w-3xl mx-auto px-4 py-4">
-        <div className="relative">
+      <div className="max-w-2xl mx-auto px-4 py-3">
+        <div className="flex items-end gap-2">
           <textarea
             ref={textareaRef}
             value={message}
@@ -80,17 +80,22 @@ export function ChatComposer() {
               adjustTextareaHeight();
             }}
             onKeyDown={handleKeyDown}
-            placeholder="Message AI Assistant..."
+            placeholder="Type a message..."
             disabled={isDisabled}
-            className="w-full resize-none rounded-xl border border-gray-300 px-4 py-3 pr-12 text-base focus:border-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-200 disabled:bg-gray-50 disabled:text-gray-500 transition-all"
+            className="flex-1 resize-none rounded-2xl border border-gray-300 px-3 py-2 text-sm focus:border-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-100 disabled:bg-gray-50 disabled:text-gray-500 transition-all"
             rows={1}
-            style={{ minHeight: "48px", maxHeight: "120px" }}
+            style={{ minHeight: "36px", maxHeight: "100px" }}
           />
           
           <button
             onClick={handleSubmit}
             disabled={!message.trim() || isDisabled}
-            className="absolute right-2 top-2 w-8 h-8 rounded-lg bg-gray-800 hover:bg-gray-900 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors flex items-center justify-center"
+            className="w-9 h-9 rounded-full bg-blue-500 hover:bg-blue-600 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors flex items-center justify-center flex-shrink-0"
+            style={{
+              backgroundColor: !message.trim() || isDisabled ? '#d1d5db' : '#3b82f6',
+              minWidth: '36px',
+              minHeight: '36px'
+            }}
           >
             {isDisabled ? (
               <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
