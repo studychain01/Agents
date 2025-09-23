@@ -22,62 +22,52 @@ export default function ConversationList() {
   // ^ Boolean flag: true if there’s at least one message.
 
   return (
-    // ^ Returns JSX to render the sidebar UI.
-    <div className="h-full bg-gray-50 border-r border-gray-200 flex flex-col">
-      {/* Root container: full height, light gray bg, right border, vertical layout */}
-      
+    <div className="h-full flex flex-col">
       {/* Header */}
       <div className="p-4 border-b border-gray-200">
-        {/* Top header area with padding and bottom border */}
         <button
           onClick={handleNewChat}
-          // ^ Clicking this triggers CLEAR_MESSAGES via the handler above.
-          className="w-full bg-blue-600 hover:bg-blue-700 text-white rounded-lg px-4 py-2 text-sm font-medium transition-colors"
+          className="w-full bg-blue-600 hover:bg-blue-700 text-white rounded-lg px-4 py-3 text-sm font-medium transition-colors flex items-center justify-center space-x-2"
         >
-          {/* Full-width primary button with Tailwind styles and hover color */}
-          + New Chat
-          {/* Button label */}
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+          </svg>
+          <span>New Chat</span>
         </button>
       </div>
 
       {/* Conversation List */}
       <div className="flex-1 overflow-y-auto">
-        {/* Middle area grows to fill space; scrolls if content is tall */}
         {hasMessages ? (
-          // ^ Conditional render: if there are messages, show a “Current Chat” card…
-          <div className="p-2">
-            {/* Small padding around the card */}
-            <div className="bg-white rounded-lg p-3 mb-2 border border-gray-200 bg-blue-50 border-blue-200">
-              {/* A card with rounded corners and (note: both white and blue-50 are listed;
-                  the last one wins, so this ends up blue-50 with a blue border) */}
-              <div className="text-sm font-medium text-gray-900 mb-1">
-                {/* Title text for the card */}
+          <div className="p-3">
+            <div className="bg-blue-50 rounded-lg p-3 border border-blue-200">
+              <div className="text-sm font-medium text-blue-900 mb-1">
                 Current Chat
               </div>
-              <div className="text-xs text-gray-600">
-                {/* Subtext showing message count with pluralization */}
+              <div className="text-xs text-blue-600">
                 {messageCount} message{messageCount !== 1 ? 's' : ''}
-                {/* ^ If count is not 1, append 's' to pluralize. */}
               </div>
             </div>
           </div>
         ) : (
-          // …else (no messages) show an empty state.
-          <div className="p-4 text-center text-gray-500 text-sm">
-            {/* Centered, muted text as an empty-state hint */}
-            No conversations yet.<br />
-            {/* ^ <br /> inserts a line break. */}
-            Start a new chat to begin!
+          <div className="p-6 text-center">
+            <div className="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-3">
+              <svg className="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+              </svg>
+            </div>
+            <p className="text-sm text-gray-500">
+              No conversations yet.<br />
+              Start a new chat to begin!
+            </p>
           </div>
         )}
       </div>
 
       {/* Footer */}
       <div className="p-4 border-t border-gray-200">
-        {/* Bottom footer with padding and top border */}
         <div className="text-xs text-gray-500 text-center">
-          {/* Small, muted, centered label */}
-          VenueKonnex Chat
+          AI Assistant
         </div>
       </div>
     </div>
