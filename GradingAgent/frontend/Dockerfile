@@ -23,32 +23,20 @@ COPY index.html ./
 RUN npm run build
 
 # Production stage
-FROM nginx:alpine
+FROM node:18-alpine
+
+# Install serve for static file serving
+RUN npm install -g serve
+
+# Set working directory
+WORKDIR /app
 
 # Copy built assets from builder stage
-COPY --from=builder /app/dist /usr/share/nginx/html
+COPY --from=builder /app/dist ./dist
 
-# Copy nginx configuration
-COPY <<EOF /etc/nginx/conf.d/default.conf
-server {
-    listen 80;
-    server_name localhost;
-    
-    location / {
-        root /usr/share/nginx/html;
-        index index.html index.htm;
-        try_files \$uri \$uri/ /index.html;
-    }
-    
-    # Enable gzip compression
-    gzip on;
-    gzip_types text/plain text/css application/json application/javascript text/xml application/xml application/xml+rss text/javascript;
-}
-EOF
+# Expose port 3000 (App Runner default)
+EXPOSE 3000
 
-# Expose port
-EXPOSE 80
-
-# Start nginx
-CMD ["nginx", "-g", "daemon off;"]
+# Start the application using serve
+CMD ["serve", "-s", "dist", "-l", "3000"]
 
